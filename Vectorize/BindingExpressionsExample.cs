@@ -12,12 +12,10 @@ namespace Vectorize
     {
         [FunctionName("LogQueueMessage")]
         public static void Run(
-            [QueueTrigger("%queueappsetting%")] string myQueueItem,
-            DateTimeOffset insertionTime,
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = null)] HttpRequest req,
             ILogger log)
         {
-            log.LogInformation($"Message content: {myQueueItem}");
-            log.LogInformation($"Created at: {insertionTime}");
+            log.LogInformation($"Message content: {req}");
         }
     }
 }
